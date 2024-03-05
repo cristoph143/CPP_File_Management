@@ -1,16 +1,17 @@
-#include "Menu.h"
+#include "./include/FileOps/FileOpsUtility.h"
+#include "./include/MenuOps/Menu.h"
+
 #include <iostream>
 
 int main() {
-  FileOps::Menu menu;
-  FileOps::MenuItem items[] = {
-      {"Create and save file", FileOps::createAndSaveFile},
-      {"Read file", FileOps::readFiles}};
+  MenuOps::Menu menu;
+  FileOps::FileOpsUtility file;
 
-  for (const auto &item : items) {
-    menu.addMenuItem(item);
-  }
+  // Add menu items that are bound to the static methods in FileOpsUtility.
+  menu.addMenuItem({"Create and save file", file.createAndSaveFile});
+  menu.addMenuItem({"Read file", file.readFiles});
 
+  // Run the menu to allow the user to choose options.
   menu.run();
 
   std::cout << "Exiting...\n";
